@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
+
 using UnityEngine.UI;
 using System.Linq;
 
@@ -96,20 +96,5 @@ public class gameManager : MonoBehaviour
 
 }
 
-=======
 
-public class gameManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("asd");
-    }
-}
->>>>>>> 44cc43120de611477a0da8b1f5a1ff7987037e41
