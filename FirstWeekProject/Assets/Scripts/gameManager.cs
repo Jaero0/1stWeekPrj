@@ -37,24 +37,28 @@ public class gameManager : MonoBehaviour
 
 
         Time.timeScale = 1.0f;
+
         int[] rtans = { 0,0,1,1,2,2,3,3,4,4,5,5};
 
-        rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+
+        humans = humans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
         for (int i = 0; i < 12; i++)
         {
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("cards").transform;
 
-            float x = (i / 4) * 1.4f - 1.4f;
-            float y = (i % 4) * 1.4f - 3.0f;
+
+            float x = (i % 4) * 1.4f - 2.1f;
+            float y = (i / 4) * 1.4f - 3.0f;
             newCard.transform.position = new Vector3(x, y, 0);
 
-            humanName = "human" + rtans[i].ToString();
+            string humanName = "human" + humans[i].ToString();
+
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(humanName);
         }
     }
-        // Update is called once per frame
+
         void Update()
         {
             time += Time.deltaTime;
@@ -63,9 +67,8 @@ public class gameManager : MonoBehaviour
              if(time >= 30)
                  {
                      GameEnd();
-
                  }
-        scoreTxt.text = "¸ÅÄªÈ½¼ö: " + count.ToString();
+        scoreTxt.text = "Â¸Ã…Ã„ÂªÃˆÂ½Â¼Ã¶: " + count.ToString();
     }
 
     public void isMatched()
@@ -77,15 +80,15 @@ public class gameManager : MonoBehaviour
         {
             if (firstCardImage == "human0" || firstCardImage == "human1")
             {
-                teamName.text = "Á¤ÀçÈ£";
+                teamName.text = "ÃÂ¤Ã€Ã§ÃˆÂ£";
             }
             else if (firstCardImage == "human2" || firstCardImage == "human3")
             {
-                teamName.text = "±èÁØ¹ü";
+                teamName.text = "Â±Ã¨ÃÃ˜Â¹Ã¼";
             }
             else if (firstCardImage == "human4" || firstCardImage == "human5")
             {
-                teamName.text = "¼Û½ÂÈÆ";
+                teamName.text = "Â¼Ã›Â½Ã‚ÃˆÃ†";
             }
            
             audioSource.PlayOneShot(match);
@@ -104,7 +107,7 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void deMatched()  // ³ª´« ÀÌÀ¯ ¸ŞÄ¡°¡ ¾È‰çÀ»¶§ ÀÏ¾î³¯¼öÀÖ´Â ÀÌº¥Æ®°¡ÀÕÀ»¼öµµÀÖ¾î¼­  
+    public void deMatched()  // Â³ÂªÂ´Â« Ã€ÃŒÃ€Â¯ Â¸ÃÃ„Â¡Â°Â¡ Â¾ÃˆÂ‰Ã§Ã€Â»Â¶Â§ Ã€ÃÂ¾Ã®Â³Â¯Â¼Ã¶Ã€Ã–Â´Ã‚ Ã€ÃŒÂºÂ¥Ã†Â®Â°Â¡Ã€Ã•Ã€Â»Â¼Ã¶ÂµÂµÃ€Ã–Â¾Ã®Â¼Â­  
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
@@ -113,7 +116,7 @@ public class gameManager : MonoBehaviour
             count++; //matching score: ssh
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
-            teamName.text = "½ÇÆĞ ¤Ğ";
+            teamName.text = "Â½Ã‡Ã†Ã Â¤Ã";
         }
         firstCard = null;
         secondCard = null;
