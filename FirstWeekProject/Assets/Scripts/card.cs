@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class card : MonoBehaviour
 {
     public Animator anim;
     public AudioClip flip;
     public AudioSource audioSource;
+
 
     void Start()
     {
@@ -21,12 +23,15 @@ public class card : MonoBehaviour
 
     public void openCard()
     {
+
         audioSource.PlayOneShot(flip);
         anim.SetBool("isOpen", true);
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
+        Imgcolor();//ssh
 
-        if(gameManager.I.firstCard == null)
+
+        if (gameManager.I.firstCard == null)
         {
             gameManager.I.firstCard = gameObject;
         }
@@ -34,6 +39,8 @@ public class card : MonoBehaviour
         {
             gameManager.I.secondCard = gameObject;
             gameManager.I.isMatched();
+            gameManager.I.deMatched();
+           
         }
     }
 
@@ -58,4 +65,12 @@ public class card : MonoBehaviour
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
     }
+
+   public  void Imgcolor() //ssh
+    {
+        Transform backImg = transform.Find("back");
+        SpriteRenderer backSpriteRenderer = backImg.GetComponent<SpriteRenderer>();
+        backSpriteRenderer.color = new Color32(121, 121, 121, 255);
+    }
+
 }
