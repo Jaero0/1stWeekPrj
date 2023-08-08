@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 6838022235295719621}
-  flip: {fileID: 8300000, guid: f6377f68a81444b42a907586a32b6ca6, type: 3}
+  flip: {fileID: 8300000, guid: 3e3e061abf59360488781ff9f18cc0bf, type: 3}
   audioSource: {fileID: -952073500362298723}
 --- !u!114 &-151268452629225105
 MonoBehaviour:
@@ -326,7 +326,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.557
   m_Pitch: 1
   Loop: 0
   Mute: 0

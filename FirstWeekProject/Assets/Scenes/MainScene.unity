@@ -282,6 +282,8 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420034}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -355,6 +357,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d491f807150cf4f936117025fcc92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 519420034}
+--- !u!95 &519420034
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d9caea11e95751547b5675dd90df727b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &702062929
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 885174738}
-  bgmusic: {fileID: 8300000, guid: 8e1168be408b2004fb9ac2ac41f26ed2, type: 3}
+  bgmusic: {fileID: 8300000, guid: 4ea4d0309a3f6d0439f6fd46e700dd3c, type: 3}
 --- !u!4 &885174740
 Transform:
   m_ObjectHideFlags: 0
@@ -862,14 +898,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTxt: {fileID: 1183994033}
+  teamName: {fileID: 0}
   card: {fileID: 4266819924107293492, guid: 9efb6684aad0fb443a623b9dbfc0f536, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
-  endTxt: {fileID: 702062929}
-  ObjscoreTxt: {fileID: 451853857}
+  endpenal: {fileID: 702062929}
   scoreTxt: {fileID: 451853858}
-  match: {fileID: 8300000, guid: 13325fcfbcbe5ca47b819a40f6306d89, type: 3}
+  camera: {fileID: 519420028}
+  match: {fileID: 8300000, guid: e427864ef7f2a8f40bff7316e92b9974, type: 3}
+  end: {fileID: 8300000, guid: 02812049a878f424d89e67a84648addc, type: 3}
+  wrong: {fileID: 8300000, guid: 565fe9d49c8ead84897585d539feb1c0, type: 3}
+  warning: {fileID: 8300000, guid: 777b4803255e1914c83d4a04089b8d56, type: 3}
+  timeOver: {fileID: 8300000, guid: 7ffba8075de69d145979c64bf49cf24e, type: 3}
   audioSource: {fileID: 1440502620}
+  audioManager: {fileID: 0}
 --- !u!4 &1440502619
 Transform:
   m_ObjectHideFlags: 0
@@ -897,7 +939,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
