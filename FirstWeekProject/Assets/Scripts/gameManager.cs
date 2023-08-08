@@ -13,6 +13,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //±èÁØ¹ü
     }
 }
