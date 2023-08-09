@@ -7,8 +7,16 @@ using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
-    float time = 20.0f;
+    float time = 60.0f;
+
+    //score --------------------------------------------------- ssh
     int count = 0;//:ssh
+    float score ;
+    float lastTime;
+    public Text countTxt;//matching score :ssh
+    public Text scoreText;
+    public Text lastTimeText;
+    //score----------------------------------------------------
     bool underTime = false; //JJH
 
     public Text timeTxt;
@@ -22,7 +30,7 @@ public class gameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject endpenal;
 
-    public Text scoreTxt;//matching score :ssh
+  
 
     public GameObject camera;//JJH
 
@@ -44,6 +52,9 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
+
+        firstCard = null;
+        secondCard = null;
 
         camera.GetComponent<camera>().NotChange();
 
@@ -75,7 +86,8 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-        scoreTxt.text = ""/* count matching*/ + count.ToString();
+       
+
     }
 
 
@@ -131,6 +143,7 @@ public class gameManager : MonoBehaviour
 
             count++; //matching score :ssh
 
+
             Penalty.enabled = false; //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
@@ -167,18 +180,32 @@ public class gameManager : MonoBehaviour
             Penalty.enabled = (true); //kjb;
         }
 
-        firstCard = null;
-        secondCard = null;
+       firstCard = null;
+       secondCard = null;
     }
+
+
 
 
 
     void GameEnd()
     {
+
+        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
+        
+    }
+
+    void endScore()
+    {
+        lastTime = time;//ssh
+        lastTimeText.text = " time:"+ lastTime.ToString("N2");
+        countTxt.text = "count:" + count.ToString();
+        score = lastTime * 100 - count * 150;
+        scoreText.text = "Score: " + score.ToString("N0"); ; 
     }
 
 }
