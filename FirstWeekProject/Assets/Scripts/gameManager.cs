@@ -155,7 +155,7 @@ public class gameManager : MonoBehaviour
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
-
+       
         if (firstCardImage != secondCardImage)
         {
             count++; //matching score: ssh
@@ -164,6 +164,7 @@ public class gameManager : MonoBehaviour
 
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
+            //ssh
 
             teamName.text = " 실패 ㅠ";
         }

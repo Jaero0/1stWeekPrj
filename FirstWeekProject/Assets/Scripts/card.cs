@@ -25,15 +25,15 @@ public class card : MonoBehaviour
             if (CloseTime <= 0.0f)
             {
                 isOpening = false;
-                CancelInvoke("closeCardInvoke");//ssh
-                closeCardInvoke();
+              
+               closeCardInvoke();
             }
         }       
     }
 
     public void openCard()
     {
-
+        
         audioSource.PlayOneShot(flip);
         anim.SetBool("isOpen", true);
         transform.Find("front").gameObject.SetActive(true);
@@ -44,7 +44,8 @@ public class card : MonoBehaviour
         if (!isOpening)//ssh
         { 
             isOpening = true;
-            CloseTime = 2.0f;           
+            CloseTime = 2.0f;
+           
         }
 
         if (gameManager.I.firstCard == null)
@@ -73,7 +74,7 @@ public class card : MonoBehaviour
     public void closeCard()
     {
 
-        CancelInvoke("closeCardInvoke");//ssh
+        //CancelInvoke("closeCardInvoke");//ssh
         Invoke("closeCardInvoke", 0.5f);
         isOpening = false;//ssh
         CloseTime = 0.03f;
