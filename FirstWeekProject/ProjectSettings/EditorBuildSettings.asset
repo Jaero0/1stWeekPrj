@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 708cba1688ea39e4f931449cd23ebdbb
   - enabled: 1
+    path: Assets/Scenes/LvSelectScene.unity
+    guid: b762de0b20d4e62459806db258a95794
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainScene2.unity
+    guid: 176a821157a82cd4a90f7515795b7db8
   m_configObjects: {}

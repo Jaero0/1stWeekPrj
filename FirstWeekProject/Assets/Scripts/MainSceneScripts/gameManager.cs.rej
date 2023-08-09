@@ -1,0 +1,42 @@
+diff a/FirstWeekProject/Assets/Scripts/MainSceneScripts/gameManager.cs b/FirstWeekProject/Assets/Scripts/MainSceneScripts/gameManager.cs	(rejected hunks)
+@@ -3,23 +3,38 @@
+ using UnityEngine;
+ using UnityEngine.UI;
+ using System.Linq;
++using UnityEditor;
+ 
+ public class gameManager : MonoBehaviour
+ {
+-    float time = 20.0f;
++    float time = 60.0f;
++
++    //score --------------------------------------------------- ssh
+     int count = 0;//:ssh
++    float score ;
++    float lastTime;
++    public Text countTxt;//matching score :ssh
++    public Text scoreText;
++    public Text lastTimeText;
++    //score----------------------------------------------------
+     bool underTime = false; //JJH
+ 
+     public Text timeTxt;
+     public Text teamName;
+     public GameObject card;
+ 
++<<<<<<< HEAD:FirstWeekProject/Assets/Scripts/MainSceneScripts/gameManager.cs
+     public static gameManager M;
++=======
++    public Text Penalty; //kjb;
++
++    public static gameManager I;
++>>>>>>> 9294ce8499d457eff296d098667d50d84b3cb297:FirstWeekProject/Assets/Scripts/gameManager.cs
+     public GameObject firstCard;
+     public GameObject secondCard;
+     public GameObject endpenal;
+ 
+-    public Text scoreTxt;//matching score :ssh
++  
+ 
+     public GameObject camera;//JJH
+ 

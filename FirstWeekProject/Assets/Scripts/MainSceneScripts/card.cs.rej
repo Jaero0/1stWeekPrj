@@ -1,0 +1,9 @@
+diff a/FirstWeekProject/Assets/Scripts/MainSceneScripts/card.cs b/FirstWeekProject/Assets/Scripts/MainSceneScripts/card.cs	(rejected hunks)
+@@ -85,6 +85,7 @@
+         anim.SetBool("isOpen", false);
+         transform.Find("back").gameObject.SetActive(true);
+         transform.Find("front").gameObject.SetActive(false);
++        gameManager.I.firstCard = null;//ssh << �ֵ� 0.5�ʵڿ� ����� 
+     }
+ 
+    public  void Imgcolor() //ssh

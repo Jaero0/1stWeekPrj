@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,16 +19,7 @@ public class card : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isOpening)//ssh
-        {
-            CloseTime -= Time.deltaTime;
-            if (CloseTime <= 0.0f)
-            {
-                isOpening = false;
-                CancelInvoke("closeCardInvoke");//ssh
-                closeCardInvoke();
-            }
-        }       
+        
     }
 
     public void openCard()
@@ -40,23 +30,17 @@ public class card : MonoBehaviour
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
         Imgcolor();//ssh
-       
 
-        if (!isOpening)//ssh
-        { 
-            isOpening = true;
-            CloseTime = 2.0f;           
-        }
 
-        if (gameManager.I.firstCard == null)
+        if (gameManager.M.firstCard == null)
         {
-            gameManager.I.firstCard = gameObject;
+            gameManager.M.firstCard = gameObject;
         }
         else
         {
-            gameManager.I.secondCard = gameObject;
-            gameManager.I.isMatched();
-            gameManager.I.deMatched();
+            gameManager.M.secondCard = gameObject;
+            gameManager.M.isMatched();
+            gameManager.M.deMatched();
            
         }
     }
@@ -73,11 +57,7 @@ public class card : MonoBehaviour
 
     public void closeCard()
     {
-
-        CancelInvoke("closeCardInvoke");//ssh
         Invoke("closeCardInvoke", 0.5f);
-        isOpening = false;//ssh
-        CloseTime = 0.03f;
     }
 
     void closeCardInvoke()
@@ -94,10 +74,5 @@ public class card : MonoBehaviour
         SpriteRenderer backSpriteRenderer = backImg.GetComponent<SpriteRenderer>();
         backSpriteRenderer.color = new Color32(121, 121, 121, 255);
     }
-  
 
-    public void cardstart()
-    {
-
-    }
 }

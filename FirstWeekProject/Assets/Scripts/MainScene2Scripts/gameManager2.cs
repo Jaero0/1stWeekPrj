@@ -1,36 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using UnityEditor;
 
-public class gameManager : MonoBehaviour
+public class gameManager2 : MonoBehaviour
 {
-    float time = 60.0f;
-
-    //score --------------------------------------------------- ssh
+    float time = 35.0f;
     int count = 0;//:ssh
-    float score ;
-    float lastTime;
-    public Text countTxt;//matching score :ssh
-    public Text scoreText;
-    public Text lastTimeText;
-    //score----------------------------------------------------
     bool underTime = false; //JJH
 
     public Text timeTxt;
     public Text teamName;
     public GameObject card;
 
-    public Text Penalty; //kjb;
-
-    public static gameManager I;
+    public static gameManager2 M;
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject endpenal;
 
-  
+    public Text scoreTxt;//matching score :ssh
 
     public GameObject camera;//JJH
 
@@ -45,61 +34,48 @@ public class gameManager : MonoBehaviour
 
     void Awake()
     {
-        I = this;
+        M = this;
 
         audioManager = FindObjectOfType<audioManager>(); //JJH
     }
 
     void Start()
     {
-
-        firstCard = null;
-        secondCard = null;
-
-        camera.GetComponent<camera>().NotChange();
-
         Time.timeScale = 1.0f;
-        int[] humans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
-
+        int[] humans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 };
 
         humans = humans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 18; i++)
         {
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("cards").transform;
 
-
-            float x = (i % 4) * 1.4f - 2.1f;
-            float y = (i / 4) * 1.4f - 3.0f;
+            float x = (i % 6) * 0.9f - 2.3f;
+            float y = (i / 6) * 1.3f - 3.3f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             humanName = "human" + humans[i].ToString();
 
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(humanName);
-
-
         }
     }
 
+    // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-       
-
+        scoreTxt.text = ""/* count matching*/ + count.ToString();
     }
-
 
     void FixedUpdate() //JJH
     {
         TimeFunc();
     }
 
-
     void TimeFunc() //JJH
     {
-
         if (time < 5 && underTime == false) //JJH
         {
             audioManager.audioSource.pitch = 1.6f;
@@ -138,25 +114,21 @@ public class gameManager : MonoBehaviour
 
             audioSource.PlayOneShot(match);
 
-            firstCard.GetComponent<card>().destroyCard();
-            secondCard.GetComponent<card>().destroyCard();
+            firstCard.GetComponent<card2>().destroyCard();
+            secondCard.GetComponent<card2>().destroyCard();
 
             count++; //matching score :ssh
-
-
-            Penalty.enabled = false; //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
             if (cardsLeft == 2)
             {
                 //endTxt.SetActive(true);
-               
-                GameEnd(); //JJH : invokeí•¨ìˆ˜ë¥¼ ì œì™¸í•¨
+
+                GameEnd(); //JJH : invokeÇÔ¼ö¸¦ Á¦¿ÜÇÔ
                 audioSource.PlayOneShot(end); // JJH
             }
         }
     }
-
 
     public void deMatched()
     {
@@ -167,45 +139,23 @@ public class gameManager : MonoBehaviour
         {
             count++; //matching score: ssh
 
-            float result = time --; // kjb
-
             audioSource.PlayOneShot(wrong);
 
-            firstCard.GetComponent<card>().closeCard();
-            secondCard.GetComponent<card>().closeCard();
+            firstCard.GetComponent<card2>().closeCard();
+            secondCard.GetComponent<card2>().closeCard();
 
-            teamName.text = " ì‹¤íŒ¨ ã… ";
-
-            Penalty.text = " -1"; //kjb;
-            Penalty.enabled = (true); //kjb;
+            teamName.text = " ½ÇÆÐ ¤Ð";
         }
 
-       firstCard = null;
-       secondCard = null;
+        firstCard = null;
+        secondCard = null;
     }
-
-
-
-
 
     void GameEnd()
     {
-
-        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
-        
     }
-
-    void endScore()
-    {
-        lastTime = time;//ssh
-        lastTimeText.text = " time:"+ lastTime.ToString("N2");
-        countTxt.text = "count:" + count.ToString();
-        score = lastTime * 100 - count * 150;
-        scoreText.text = "Score: " + score.ToString("N0"); ; 
-    }
-
 }
