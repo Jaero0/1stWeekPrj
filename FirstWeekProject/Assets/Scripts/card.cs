@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,4 +74,8 @@ public class card : MonoBehaviour
         backSpriteRenderer.color = new Color32(121, 121, 121, 255);
     }
 
+    public void cardstart()
+    {
+
+    }
 }

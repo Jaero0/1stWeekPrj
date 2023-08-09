@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text teamName;
     public GameObject card;
+
+    public Text Penalty; //kjb;
 
     public static gameManager I;
     public GameObject firstCard;
@@ -114,11 +117,11 @@ public class gameManager : MonoBehaviour
             }
             else if (firstCardImage == "human2" || firstCardImage == "human3")
             {
-                teamName.text = "JJH";
+                teamName.text = "KJB";
             }
             else if (firstCardImage == "human4" || firstCardImage == "human5")
             {
-                teamName.text = "JJH";
+                teamName.text = "SSH";
             }
 
             audioSource.PlayOneShot(match);
@@ -127,6 +130,8 @@ public class gameManager : MonoBehaviour
             secondCard.GetComponent<card>().destroyCard();
 
             count++; //matching score :ssh
+
+            Penalty.enabled = false; //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
             if (cardsLeft == 2)
@@ -149,12 +154,17 @@ public class gameManager : MonoBehaviour
         {
             count++; //matching score: ssh
 
+            float result = time --; // kjb
+
             audioSource.PlayOneShot(wrong);
 
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
             teamName.text = " 실패 ㅠ";
+
+            Penalty.text = " -1"; //kjb;
+            Penalty.enabled = (true); //kjb;
         }
 
         firstCard = null;
@@ -170,4 +180,5 @@ public class gameManager : MonoBehaviour
         audioManager.audioSource.Stop();
         audioSource.Stop();
     }
+
 }
