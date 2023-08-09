@@ -60,7 +60,7 @@ public class gameManager : MonoBehaviour
             float y = (i / 4) * 1.4f - 3.0f;
             newCard.transform.position = new Vector3(x, y, 0);
 
-            string humanName = "human" + humans[i].ToString();
+            humanName = "human" + humans[i].ToString();
 
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(humanName);
 
@@ -132,7 +132,7 @@ public class gameManager : MonoBehaviour
             if (cardsLeft == 2)
             {
                 //endTxt.SetActive(true);
-                Time.timeScale = 0.0f;
+               
                 GameEnd(); //JJH : invoke함수를 제외함
                 audioSource.PlayOneShot(end); // JJH
             }
@@ -154,7 +154,7 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
-            teamName.text = "";
+            teamName.text = " 실패 ㅠ";
         }
 
         firstCard = null;
