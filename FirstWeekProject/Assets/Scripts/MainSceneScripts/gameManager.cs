@@ -3,38 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
-    float time = 60.0f;
-
-    //score --------------------------------------------------- ssh
+    float time = 20.0f;
     int count = 0;//:ssh
-    float score ;
-    float lastTime;
-    public Text countTxt;//matching score :ssh
-    public Text scoreText;
-    public Text lastTimeText;
-    //score----------------------------------------------------
     bool underTime = false; //JJH
 
     public Text timeTxt;
     public Text teamName;
     public GameObject card;
 
-<<<<<<< HEAD:FirstWeekProject/Assets/Scripts/MainSceneScripts/gameManager.cs
     public static gameManager M;
-=======
-    public Text Penalty; //kjb;
-
-    public static gameManager I;
->>>>>>> 9294ce8499d457eff296d098667d50d84b3cb297:FirstWeekProject/Assets/Scripts/gameManager.cs
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject endpenal;
 
-  
+    public Text scoreTxt;//matching score :ssh
 
     public GameObject camera;//JJH
 
@@ -57,14 +42,6 @@ public class gameManager : MonoBehaviour
     void Start()
     {
 
-<<<<<<< HEAD:FirstWeekProject/Assets/Scripts/MainSceneScripts/gameManager.cs
-=======
-        firstCard = null;
-        secondCard = null;
-
-        camera.GetComponent<camera>().NotChange();
-
->>>>>>> 9294ce8499d457eff296d098667d50d84b3cb297:FirstWeekProject/Assets/Scripts/gameManager.cs
         Time.timeScale = 1.0f;
         int[] humans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
 
@@ -93,8 +70,7 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-       
-
+        scoreTxt.text = ""/* count matching*/ + count.ToString();
     }
 
 
@@ -150,9 +126,6 @@ public class gameManager : MonoBehaviour
 
             count++; //matching score :ssh
 
-
-            Penalty.enabled = false; //kjb;
-
             int cardsLeft = GameObject.Find("cards").transform.childCount;
             if (cardsLeft == 2)
             {
@@ -174,45 +147,25 @@ public class gameManager : MonoBehaviour
         {
             count++; //matching score: ssh
 
-            float result = time --; // kjb
-
             audioSource.PlayOneShot(wrong);
 
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
             teamName.text = " 실패 ㅠ";
-
-            Penalty.text = " -1"; //kjb;
-            Penalty.enabled = (true); //kjb;
         }
 
-       firstCard = null;
-       secondCard = null;
+        firstCard = null;
+        secondCard = null;
     }
-
-
 
 
 
     void GameEnd()
     {
-
-        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
-        
     }
-
-    void endScore()
-    {
-        lastTime = time;//ssh
-        lastTimeText.text = " time:"+ lastTime.ToString("N2");
-        countTxt.text = "count:" + count.ToString();
-        score = lastTime * 100 - count * 150;
-        scoreText.text = "Score: " + score.ToString("N0"); ; 
-    }
-
 }
