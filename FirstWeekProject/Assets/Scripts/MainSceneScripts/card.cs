@@ -31,15 +31,15 @@ public class card : MonoBehaviour
         Imgcolor();//ssh
 
 
-        if (gameManager.I.firstCard == null)
+        if (gameManager.M.firstCard == null)
         {
-            gameManager.I.firstCard = gameObject;
+            gameManager.M.firstCard = gameObject;
         }
         else
         {
-            gameManager.I.secondCard = gameObject;
-            gameManager.I.isMatched();
-            gameManager.I.deMatched();
+            gameManager.M.secondCard = gameObject;
+            gameManager.M.isMatched();
+            gameManager.M.deMatched();
            
         }
     }

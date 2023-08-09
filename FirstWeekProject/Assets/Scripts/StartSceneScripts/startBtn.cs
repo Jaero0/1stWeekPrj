@@ -9,6 +9,6 @@ public class startBtn : MonoBehaviour
 {
     public void startGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LvSelectScene");
     }
 }
