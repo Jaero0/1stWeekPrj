@@ -6,8 +6,16 @@ using System.Linq;
 
 public class gameManager : MonoBehaviour
 {
-    float time = 20.0f;
+    float time = 60.0f;
+
+    //score --------------------------------------------------- ssh
     int count = 0;//:ssh
+    float score ;
+    float lastTime;
+    public Text countTxt;//matching score :ssh
+    public Text scoreText;
+    public Text lastTimeText;
+    //score----------------------------------------------------
     bool underTime = false; //JJH
 
     public Text timeTxt;
@@ -19,7 +27,7 @@ public class gameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject endpenal;
 
-    public Text scoreTxt;//matching score :ssh
+  
 
     public GameObject camera;//JJH
 
@@ -41,6 +49,9 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
+
+        firstCard = null;
+        secondCard = null;
 
         camera.GetComponent<camera>().NotChange();
 
@@ -72,7 +83,8 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-        scoreTxt.text = ""/* count matching*/ + count.ToString();
+       
+
     }
 
 
@@ -114,11 +126,11 @@ public class gameManager : MonoBehaviour
             }
             else if (firstCardImage == "human2" || firstCardImage == "human3")
             {
-                teamName.text = "JJH";
+                teamName.text = "KJB";
             }
             else if (firstCardImage == "human4" || firstCardImage == "human5")
             {
-                teamName.text = "JJH";
+                teamName.text = "SSH";
             }
 
             audioSource.PlayOneShot(match);
@@ -128,14 +140,13 @@ public class gameManager : MonoBehaviour
 
             count++; //matching score :ssh
 
-            int cardsLeft = GameObject.Find("cards").transform.childCount;
-            if (cardsLeft == 2)
-            {
-                //endTxt.SetActive(true);
-               
-                GameEnd(); //JJH : invoke함수를 제외함
-                audioSource.PlayOneShot(end); // JJH
-            }
+           
+        }
+        int cardsLeft = GameObject.Find("cards").transform.childCount;
+        if (cardsLeft == 2 || cardsLeft == 0)
+        {
+            GameEnd(); //JJH : invoke함수를 제외함
+            audioSource.PlayOneShot(end); // JJH
         }
     }
 
@@ -157,17 +168,35 @@ public class gameManager : MonoBehaviour
             teamName.text = " 실패 ㅠ";
         }
 
-        firstCard = null;
-        secondCard = null;
+       firstCard = null;
+       secondCard = null;
     }
+
+
 
 
 
     void GameEnd()
     {
+
+        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
+        
     }
+
+
+
+    void endScore()
+    {
+        lastTime = time;//ssh
+        lastTimeText.text = " time:"+ lastTime.ToString("N2");
+        countTxt.text = "count:" + count.ToString();
+        score = lastTime * 100 - count * 150;
+        scoreText.text = "Score: " + score.ToString("N0"); ; 
+    }
+
+
 }
