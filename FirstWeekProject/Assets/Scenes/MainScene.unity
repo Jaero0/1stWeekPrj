@@ -752,6 +752,7 @@ MonoBehaviour:
   timeTxt: {fileID: 1183994033}
   teamName: {fileID: 827611566}
   card: {fileID: 4266819924107293492, guid: 9efb6684aad0fb443a623b9dbfc0f536, type: 3}
+  Penalty: {fileID: 0}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   endpenal: {fileID: 0}

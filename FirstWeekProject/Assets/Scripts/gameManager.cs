@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text teamName;
     public GameObject card;
+
+    public Text Penalty; //kjb;
 
     public static gameManager I;
     public GameObject firstCard;
@@ -140,13 +143,17 @@ public class gameManager : MonoBehaviour
 
             count++; //matching score :ssh
 
-           
-        }
-        int cardsLeft = GameObject.Find("cards").transform.childCount;
-        if (cardsLeft == 2 || cardsLeft == 0)
-        {
-            GameEnd(); //JJH : invoke함수를 제외함
-            audioSource.PlayOneShot(end); // JJH
+
+            Penalty.enabled = false; //kjb;
+
+            int cardsLeft = GameObject.Find("cards").transform.childCount;
+            if (cardsLeft == 2)
+            {
+                //endTxt.SetActive(true);
+               
+                GameEnd(); //JJH : invoke함수를 제외함
+                audioSource.PlayOneShot(end); // JJH
+            }
         }
     }
 
@@ -160,12 +167,17 @@ public class gameManager : MonoBehaviour
         {
             count++; //matching score: ssh
 
+            float result = time --; // kjb
+
             audioSource.PlayOneShot(wrong);
 
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
 
             teamName.text = " 실패 ㅠ";
+
+            Penalty.text = " -1"; //kjb;
+            Penalty.enabled = (true); //kjb;
         }
 
        firstCard = null;
@@ -187,8 +199,6 @@ public class gameManager : MonoBehaviour
         
     }
 
-
-
     void endScore()
     {
         lastTime = time;//ssh
@@ -197,6 +207,5 @@ public class gameManager : MonoBehaviour
         score = lastTime * 100 - count * 150;
         scoreText.text = "Score: " + score.ToString("N0"); ; 
     }
-
 
 }
