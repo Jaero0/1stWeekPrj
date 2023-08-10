@@ -6,7 +6,7 @@ using System.Linq;
 
 public class gameManager2 : MonoBehaviour
 {
-    float time = 20.0f;
+    float time = 80.0f;
 
     int count = 0;//:ssh
     float score;
@@ -28,6 +28,8 @@ public class gameManager2 : MonoBehaviour
     public GameObject secondCard;
     public GameObject endpenal;
 
+    public Text Penalty; //kjb;
+    public GameObject PenaltyTxt; //kjb;
     public GameObject camera;//JJH
 
     string humanName;
@@ -116,15 +118,15 @@ public class gameManager2 : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-            if (firstCardImage == "human0" || firstCardImage == "human1")
+            if (firstCardImage == "human0" || firstCardImage == "human1" || firstCardImage == "human2")
             {
                 teamName.text = "JJH";
             }
-            else if (firstCardImage == "human2" || firstCardImage == "human3")
+            else if (firstCardImage == "human3" || firstCardImage == "human4" || firstCardImage == "human5")
             {
                 teamName.text = "KJB";
             }
-            else if (firstCardImage == "human4" || firstCardImage == "human5")
+            else if (firstCardImage == "human6" || firstCardImage == "human7" || firstCardImage == "human8")
             {
                 teamName.text = "SSH";
             }
@@ -136,13 +138,16 @@ public class gameManager2 : MonoBehaviour
 
             count++; //matching score :ssh
 
-            Penalty.enabled = false; //kjb;
+
+            PenaltyTxt.SetActive(false); //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
 
             if (cardsLeft == 2)
             {
                 GameEnd(); //JJH : invoke
+
+
                 audioSource.PlayOneShot(end); // JJH
             }
         }
@@ -163,10 +168,13 @@ public class gameManager2 : MonoBehaviour
             firstCard.GetComponent<card2>().closeCard();
             secondCard.GetComponent<card2>().closeCard();
 
-            teamName.text = "실패 ㅠ";
+
+            teamName.text = "fail";//
+
 
             Penalty.text = " -1"; //kjb;
-            Penalty.enabled = (true); //kjb;
+
+            PenaltyTxt.SetActive(true); //kjb;
         }
 
         firstCard = null;
@@ -191,5 +199,15 @@ public class gameManager2 : MonoBehaviour
         countTxt.text = "count:" + count.ToString();
         score = lastTime * 100 - count * 150;
         scoreText.text = "Score: " + score.ToString("N0"); ;
+
+        if (score < 0)
+        {
+            score = 0;
+            scoreText.text = "Score: " + score.ToString("N0"); ;
+        }
+        else
+        {
+            scoreText.text = "Score: " + score.ToString("N0"); ;
+        }
     }
 }
