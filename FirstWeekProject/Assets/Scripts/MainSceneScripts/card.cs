@@ -71,7 +71,7 @@ public class card : MonoBehaviour
 
     public void closeCard()
     {
-        CancelInvoke("closeCardInvoke");//ssh
+        //CancelInvoke("closeCardInvoke");//ssh
         Invoke("closeCardInvoke", 0.5f);
         isOpening = false;//ssh
         CloseTime = 0.03f;
