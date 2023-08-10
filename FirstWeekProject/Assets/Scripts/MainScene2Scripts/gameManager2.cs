@@ -21,6 +21,8 @@ public class gameManager2 : MonoBehaviour
 
     public Text scoreTxt;//matching score :ssh
 
+    //public Text Penalty; //kjb;
+
     public GameObject camera;//JJH
 
     string humanName;
@@ -119,6 +121,8 @@ public class gameManager2 : MonoBehaviour
 
             count++; //matching score :ssh
 
+            //Penalty.enabled = false; //kjb;
+
             int cardsLeft = GameObject.Find("cards").transform.childCount;
             if (cardsLeft == 2)
             {
@@ -145,6 +149,9 @@ public class gameManager2 : MonoBehaviour
             secondCard.GetComponent<card2>().closeCard();
 
             teamName.text = " ½ÇÆÐ ¤Ð";
+
+            //Penalty.text = " -1"; //kjb;
+            //Penalty.enabled = (true); //kjb;
         }
 
         firstCard = null;
