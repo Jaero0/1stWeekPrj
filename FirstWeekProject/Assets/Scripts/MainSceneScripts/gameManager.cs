@@ -14,7 +14,7 @@ public class gameManager : MonoBehaviour
     public Text teamName;
     public GameObject card;
 
-    public static gameManager M;
+    public static gameManager I;
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject endpenal;
@@ -34,7 +34,7 @@ public class gameManager : MonoBehaviour
 
     void Awake()
     {
-        M = this;
+        I = this;
 
         audioManager = FindObjectOfType<audioManager>(); //JJH
     }
