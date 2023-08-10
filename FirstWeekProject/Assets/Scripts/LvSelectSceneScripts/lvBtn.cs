@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class lvBtn : MonoBehaviour
 {
-    public GameObject btn1;
-    public GameObject btn2;
-    public GameObject btn3;
-    public GameObject btn4;
-
+    // Start is called before the first frame update
     public void Main()
     {
         SceneManager.LoadScene("MainScene");
