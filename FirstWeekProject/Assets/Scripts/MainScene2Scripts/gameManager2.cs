@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class gameManager2 : MonoBehaviour
 {
-    float time = 35.0f;
+    float time = 20.0f;
+
     int count = 0;//:ssh
+    float score;
+    float lastTime;
+    public Text countTxt;//matching score :ssh
+    public Text scoreText;
+    public Text lastTimeText;
+
     bool underTime = false; //JJH
 
     public Text timeTxt;
@@ -18,8 +25,6 @@ public class gameManager2 : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject endpenal;
-
-    public Text scoreTxt;//matching score :ssh
 
     //public Text Penalty; //kjb;
 
@@ -43,8 +48,14 @@ public class gameManager2 : MonoBehaviour
 
     void Start()
     {
+        /*
+        firstCard = null; //ssh
+        secondCard = null; //ssh
+        */
+
         Time.timeScale = 1.0f;
         int[] humans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 };
+
 
         humans = humans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
@@ -53,31 +64,35 @@ public class gameManager2 : MonoBehaviour
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("cards").transform;
 
-            float x = (i % 6) * 0.9f - 2.3f;
-            float y = (i / 6) * 1.3f - 3.3f;
+
+            float x = (i % 6) * 0.9f - 2.2f;
+            float y = (i / 6) * 0.9f - 3.0f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             humanName = "human" + humans[i].ToString();
 
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(humanName);
+
+
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-        scoreTxt.text = ""/* count matching*/ + count.ToString();
     }
+
 
     void FixedUpdate() //JJH
     {
         TimeFunc();
     }
 
+
     void TimeFunc() //JJH
     {
+
         if (time < 5 && underTime == false) //JJH
         {
             audioManager.audioSource.pitch = 1.6f;
@@ -124,15 +139,15 @@ public class gameManager2 : MonoBehaviour
             //Penalty.enabled = false; //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
+
             if (cardsLeft == 2)
             {
-                //endTxt.SetActive(true);
-
-                GameEnd(); //JJH : invokeÇÔ¼ö¸¦ Á¦¿ÜÇÔ
+                GameEnd(); //JJH : invokeï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 audioSource.PlayOneShot(end); // JJH
             }
         }
     }
+
 
     public void deMatched()
     {
@@ -148,7 +163,7 @@ public class gameManager2 : MonoBehaviour
             firstCard.GetComponent<card2>().closeCard();
             secondCard.GetComponent<card2>().closeCard();
 
-            teamName.text = " ½ÇÆÐ ¤Ð";
+            teamName.text = " ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½";
 
             //Penalty.text = " -1"; //kjb;
             //Penalty.enabled = (true); //kjb;
@@ -158,11 +173,23 @@ public class gameManager2 : MonoBehaviour
         secondCard = null;
     }
 
+
+
     void GameEnd()
     {
+        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
+    }
+
+    void endScore()
+    {
+        lastTime = time;//ssh
+        lastTimeText.text = " time:" + lastTime.ToString("N2");
+        countTxt.text = "count:" + count.ToString();
+        score = lastTime * 100 - count * 150;
+        scoreText.text = "Score: " + score.ToString("N0"); ;
     }
 }
