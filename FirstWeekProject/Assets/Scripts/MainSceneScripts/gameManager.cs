@@ -18,7 +18,8 @@ public class gameManager : MonoBehaviour
 
     bool underTime = false; //JJH
 
-    //public Text Penalty; //kjb;
+    public Text Penalty; //kjb;
+    public GameObject PenaltyTxt; //kjb;
 
     public Text timeTxt;
     public Text teamName;
@@ -139,7 +140,7 @@ public class gameManager : MonoBehaviour
 
             count++; //matching score :ssh
 
-            //Penalty.enabled = false; //kjb;
+            PenaltyTxt.SetActive(false); //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
 
@@ -170,8 +171,9 @@ public class gameManager : MonoBehaviour
 
             teamName.text = " 실패 ㅠ";
 
-            //Penalty.text = " -1"; //kjb;
-            //Penalty.enabled = (true); //kjb;
+            Penalty.text = " -1"; //kjb;
+
+            PenaltyTxt.SetActive(true); //kjb;
         }
 
         firstCard = null;

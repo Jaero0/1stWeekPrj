@@ -26,7 +26,8 @@ public class gameManager2 : MonoBehaviour
     public GameObject secondCard;
     public GameObject endpenal;
 
-    //public Text Penalty; //kjb;
+    public Text Penalty; //kjb;
+    public GameObject PenaltyTxt; //kjb;
 
     public GameObject camera;//JJH
 
@@ -136,13 +137,15 @@ public class gameManager2 : MonoBehaviour
 
             count++; //matching score :ssh
 
-            //Penalty.enabled = false; //kjb;
+            PenaltyTxt.SetActive(false); //kjb;
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
 
             if (cardsLeft == 2)
             {
+
                 GameEnd(); //JJH : 
+
                 audioSource.PlayOneShot(end); // JJH
             }
         }
@@ -163,10 +166,13 @@ public class gameManager2 : MonoBehaviour
             firstCard.GetComponent<card2>().closeCard();
             secondCard.GetComponent<card2>().closeCard();
 
+
             teamName.text = "fail";//
 
-            //Penalty.text = " -1"; //kjb;
-            //Penalty.enabled = (true); //kjb;
+
+            Penalty.text = " -1"; //kjb;
+
+            PenaltyTxt.SetActive(true); //kjb;
         }
 
         firstCard = null;
