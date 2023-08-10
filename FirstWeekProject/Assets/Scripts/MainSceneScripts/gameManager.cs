@@ -223,6 +223,8 @@ public class gameManager : MonoBehaviour
         }
         float bestScore = PlayerPrefs.GetFloat("bestscore");
         bestScoreTxt.text = "BestScore:"+bestScore.ToString("N0");
+
+        //KJB git test;
     }
 }
 
