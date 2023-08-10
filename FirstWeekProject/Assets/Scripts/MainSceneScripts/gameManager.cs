@@ -6,7 +6,7 @@ using System.Linq;
 
 public class gameManager : MonoBehaviour
 {
-    float time = 20.0f;
+    float time = 60.0f;
 
     int count = 0;//:ssh
     float score;
@@ -14,6 +14,7 @@ public class gameManager : MonoBehaviour
     public Text countTxt;//matching score :ssh
     public Text scoreText;
     public Text lastTimeText;
+    public Text bestScoreTxt;
 
     bool underTime = false; //JJH
 
@@ -82,6 +83,8 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
+
+       
     }
 
 
@@ -121,11 +124,11 @@ public class gameManager : MonoBehaviour
             {
                 teamName.text = "JJH";
             }
-            else if (firstCardImage == "human2" || firstCardImage == "human3")
+            else if (firstCardImage == "human3" || firstCardImage == "human4")
             {
                 teamName.text = "KJB";
             }
-            else if (firstCardImage == "human4" || firstCardImage == "human5")
+            else if (firstCardImage == "human6" || firstCardImage == "human7")
             {
                 teamName.text = "SSH";
             }
@@ -195,5 +198,31 @@ public class gameManager : MonoBehaviour
         countTxt.text = "count:" + count.ToString();
         score = lastTime * 100 - count * 150;
         scoreText.text = "Score: " + score.ToString("N0"); ;
+
+        if (score < 0)
+        {
+            score = 0;
+            scoreText.text = "Score: " + score.ToString("N0"); ;
+        }
+        else if (score > 0)
+        {
+            scoreText.text = "Score: " + score.ToString("N0"); ;
+        }
+
+
+        if (PlayerPrefs.HasKey("bestscore") == false)
+        {
+            PlayerPrefs.SetFloat("bestscore", score);
+        }
+        else
+        {
+            if (PlayerPrefs.GetFloat("bestscore") < score)
+            {
+                PlayerPrefs.SetFloat("bestscore", score);
+            }
+        }
+        float bestScore = PlayerPrefs.GetFloat("bestscore");
+        bestScoreTxt.text = "BestScore:"+bestScore.ToString("N0");
     }
 }
+
