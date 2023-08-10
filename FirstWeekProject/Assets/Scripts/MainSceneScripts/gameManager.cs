@@ -7,7 +7,14 @@ using System.Linq;
 public class gameManager : MonoBehaviour
 {
     float time = 20.0f;
+
     int count = 0;//:ssh
+    float score;
+    float lastTime;
+    public Text countTxt;//matching score :ssh
+    public Text scoreText;
+    public Text lastTimeText;
+
     bool underTime = false; //JJH
 
     public Text timeTxt;
@@ -18,8 +25,6 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject endpenal;
-
-    public Text scoreTxt;//matching score :ssh
 
     public GameObject camera;//JJH
 
@@ -41,6 +46,10 @@ public class gameManager : MonoBehaviour
 
     void Start()
     {
+        /*
+        firstCard = null; //ssh
+        secondCard = null; //ssh
+        */
 
         Time.timeScale = 1.0f;
         int[] humans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
@@ -70,7 +79,6 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
-        scoreTxt.text = ""/* count matching*/ + count.ToString();
     }
 
 
@@ -127,10 +135,9 @@ public class gameManager : MonoBehaviour
             count++; //matching score :ssh
 
             int cardsLeft = GameObject.Find("cards").transform.childCount;
+
             if (cardsLeft == 2)
             {
-                //endTxt.SetActive(true);
-               
                 GameEnd(); //JJH : invoke함수를 제외함
                 audioSource.PlayOneShot(end); // JJH
             }
@@ -163,9 +170,19 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        endScore();
         endpenal.SetActive(true);
         Time.timeScale = 0f;
         audioManager.audioSource.Stop();
         audioSource.Stop();
+    }
+
+    void endScore()
+    {
+        lastTime = time;//ssh
+        lastTimeText.text = " time:" + lastTime.ToString("N2");
+        countTxt.text = "count:" + count.ToString();
+        score = lastTime * 100 - count * 150;
+        scoreText.text = "Score: " + score.ToString("N0"); ;
     }
 }
